@@ -1,0 +1,60 @@
+<div class="">
+  <div class="w-full absolute z-10 right-0 h-full overflow-x-hidden transform translate-x-0 transition ease-in-out duration-700" id="checkout">
+    <div class="flex items-end lg:flex-row flex-col justify-center" id="cart">
+      <div class="lg:w-1/2 md:w-8/12 w-full lg:px-8 lg:py-14 md:px-6 px-4 md:py-8 py-4 bg-white dark:bg-gray-800 overflow-y-hidden overflow-x-hidden lg:h-screen h-auto" id="scroll">
+        <p class="lg:text-4xl text-3xl font-black leading-10 text-gray-800 dark:text-white pt-3">Bag</p>
+        <% if @cart_items.present? %>
+          <p class="text-base leading-3 text-gray-600 dark:text-white pt-2">You have <%= @cart_items.count %> items in your bag</p>
+          <% @cart_items.each do |cart_item| %>
+            <div class="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-50">
+              <div class="md:w-4/12 2xl:w-1/4 w-full">
+                <img src="https://deliveza.com.ve/wp-content/uploads/2021/08/a7dee3_4c558736f7b243329c59427d855d278c_mv2.jpg" alt="Black Leather Bag" class="h-full object-center object-cover md:block hidden" />
+              </div>
+              <div class="md:pl-3 md:w-8/12 2xl:w-3/4 flex flex-col justify-center">
+                <div class="flex items-center justify-between w-full pt-1">
+                  <p class="text-base font-black leading-none text-gray-800 dark:text-white"><%= cart_item.product.product_name %></p>
+                </div>
+                <p class="text-xs leading-3 text-gray-600 dark:text-white pt-2"><%= number_to_currency(cart_item.total_price_product) %></p>
+                <p class="text-xs leading-3 text-gray-600 dark:text-white py-4">Color: Green</p>
+                <p class="w-96 text-xs leading-3 text-gray-600 dark:text-white">Quantity: <%= cart_item.quantity %></p>
+                <div class="flex items-center justify-between pt-5">
+                  <div class="flex itemms-center">
+                    <%= form_with(model: cart_item, url: cart_item_path(cart_item), method: :delete, local: true) do |form| %>
+                      <%= form.submit "Eliminar", data: { confirm: "¿Estás seguro?" } %>
+                    <% end %>
+                  </div>
+                  <p class="text-base font-black leading-none text-gray-800 dark:text-white"><%= number_to_currency(cart_item.total_price_product) %></p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="text-base leading-3 text-gray-600 dark:text-white pt-2 mt-4">You have no items in your bag</p>
+        <% end %>
+      </div>
+      <div class="lg:w-96 md:w-8/12 w-full bg-gray-100 dark:bg-gray-900 h-full">
+        <div class="flex flex-col lg:h-screen h-auto lg:px-8 md:px-7 px-4 lg:py-20 md:py-10 py-6 justify-between overflow-y-auto">
+          <div>
+            <p class="lg:text-4xl text-3xl font-black leading-9 text-gray-800 dark:text-white">Summary</p>
+            <div class="flex items-center justify-between pt-16">
+              <p class="text-base leading-none text-gray-800 dark:text-white">Subtotal</p>
+              <p class="text-base leading-none text-gray-800 dark:text-white"><%= number_to_currency(@total_price_cart) %></p>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center pb-6 justify-between lg:pt-5 pt-20">
+              <p class="text-2xl leading-normal text-gray-800 dark:text-white">Total</p>
+              <p class="text-2xl font-bold leading-normal text-right text-gray-800 dark:text-white"><%= number_to_currency(@total_price_cart) %></p>
+            </div>
+            <%= form_with(model: @invoice, url: invoices_path, method: :post) do |f| %>
+              <%= f.hidden_field :status, value: 'pending' %>
+              <%= f.submit 'Checkout', class: "w-full bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-4 rounded cursor-pointer" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
