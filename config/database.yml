@@ -15,3 +15,8 @@ development:
   adapter: postgresql
   encoding: unicode
   url: postgres://briannysmonserrate@localhost/m_products
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  url: postgres://briannysmonserrate@localhost/m_products_test
