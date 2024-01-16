@@ -1,0 +1,46 @@
+<div class="container mx-auto p-8 bg-white shadow-md rounded-md py-2 px-6 mt-6 rounded rounded-md">
+  <h1 class="text-3xl font-bold mb-6 mt-4">Detalles de la Factura</h1>
+  <div class="grid grid-cols-2 gap-4">
+    <div class="mb-4">
+      <span class="text-gray-500">ID:</span>
+      <span class="font-semibold"><%= @invoice.id %></span>
+    </div>
+
+    <div class="mb-4">
+      <span class="text-gray-500">Estado:</span>
+      <span class="font-semibold"><%= @invoice.status.capitalize %></span>
+    </div>
+
+    <!-- Otros campos de la factura -->
+
+    <div class="col-span-2 mb-4">
+      <h2 class="text-lg font-semibold mb-2">Cart Items</h2>
+      <% if @invoice.cart_items.any? %>
+        <ul>
+          <% @invoice.cart_items.each do |cart_item| %>
+            <li class="mb-4 flex items-center">
+              <div class="md:w-4/12 2xl:w-1/4 w-full">
+                <img src="https://deliveza.com.ve/wp-content/uploads/2021/08/a7dee3_4c558736f7b243329c59427d855d278c_mv2.jpg" alt="Black Leather Bag" class="h-full object-center object-cover md:block hidden" />
+              </div>
+              <div>
+                <span class="font-semibold"><%= link_to cart_item.product.product_name, cart_item.product %></span>
+                <span class="text-gray-600 block">Cantidad: <%= cart_item.quantity %></span>
+                <span class="text-gray-600 block">Precio Total: <%= number_to_currency(cart_item.total_price_product) %></span>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="text-gray-600">No hay Cart Items asociados a esta factura.</p>
+      <% end %>
+    </div>
+
+    <div class="col-span-2">
+      <div class="flex space-x-4">
+        <%= form_with(model: @invoice, url: @invoice, method: :delete, local: true) do |form| %>
+          <%= form.submit "Eliminar", data: { confirm: "¿Estás seguro?" }, class: "bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-md" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
