@@ -1,0 +1,31 @@
+<div class="w-full mt-8  mb-24 pb-24">
+  <div class="px-4 sm:px-6 lg:px-8">
+    <div class="bg-white-500 rounded-lg shadow-lg max-w-2xl mx-auto mt-6">
+      <div class="bg-gray-100 rounded-lg p-4">
+        <div class="font-bold text-lg mb-2 text-center">New Product</div>
+      </div>
+      <div class="px-8 py-4">
+        <%= form_with(model: @product, url: products_path, method: :post, html: { class: "px-4 mt-4" }) do |f| %>
+          <div class="mb-6">
+            <%= f.label :product_name, class: "block text-gray-700 text-sm font-bold mb-2" %>
+            <%= f.text_field :product_name, class: "shadow appearance-none border border-gray-300 rounded w-full py-3 px-4 text-lg text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+          </div>
+
+          <div class="mb-6">
+            <%= f.label :product_price, class: "block text-gray-700 text-sm font-bold mb-2" %>
+            <%= f.number_field :product_price, class: "shadow appearance-none border border-gray-300 rounded w-full py-3 px-4 text-lg text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+          </div>
+
+          <div class="mb-6">
+            <%= f.label :product_description, class: "block text-gray-700 text-sm font-bold mb-2" %>
+            <%= f.text_field :product_description, class: "shadow appearance-none border border-gray-300 rounded w-full py-3 px-4 text-lg text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+          </div>
+
+          <div class="flex justify-center items-center mb-6">
+            <%= f.submit "Guardar", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline mt-4" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="flex justify-end items-center mt-4 py-2 mr-6">
+  <%= link_to "+ New product", new_product_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+</div>
+<div class="bg-white">
+  <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+    <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+      <% @products.each do |product| %>
+        <%= render :partial => 'product_card', locals: { product: product } %>
+      <% end %>
+    </div>
+  </div>
+</div>

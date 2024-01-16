@@ -1,0 +1,10 @@
+<%= link_to product_path(product) do %>
+  <div class="rounded rounded-lg shadow py-2 px-4">
+    <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+      <img src="https://deliveza.com.ve/wp-content/uploads/2021/08/a7dee3_4c558736f7b243329c59427d855d278c_mv2.jpg" alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." class="h-full w-full object-cover object-center group-hover:opacity-75">
+    </div>
+    <h3 class="mt-4 text-sm text-gray-700"><%= product.product_name %></h3>
+    <p class="mt-1 text-lg font-medium text-gray-900 mt-2"><%= number_to_currency(product.try(:product_price)) %></p>
+  </div>
+<% end %>
+

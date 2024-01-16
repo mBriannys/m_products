@@ -1,0 +1,52 @@
+<div class="px-4 sm:px-6 lg:px-8 m-10">
+  <div class="flex flex-col justify-between">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+      <div class="shadow shadow-lg rounded rounded-lg">
+        <img src="https://deliveza.com.ve/wp-content/uploads/2021/08/a7dee3_4c558736f7b243329c59427d855d278c_mv2.jpg" alt="Two each of gray, white, and black shirts arranged on table." class="object-cover object-center">
+      </div>
+      <div class="py-2 px-4">
+        <h2 class="text-2xl font-bold text-gray-900 sm:pr-12"><%= @product.product_name %></h2>
+        <section aria-labelledby="information-heading" class="mt-2">
+          <h3 id="information-heading" class="sr-only">Product information</h3>
+          <p class="text-2xl text-gray-900"><%= number_to_currency(@product.product_price) %></p>
+          <div class="mt-6">
+            <h4 class="sr-only">Reviews</h4>
+            <div class="flex items-center">
+              <div class="flex items-center">
+                <svg class="text-gray-900 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                </svg>
+                <svg class="text-gray-900 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                </svg>
+                <svg class="text-gray-900 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                </svg>
+                <svg class="text-gray-900 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                </svg>
+                <svg class="text-gray-200 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <p class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">117 reviews</p>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="options-heading" class="mt-10">
+          <h3 id="options-heading" class="sr-only">Product options</h3>
+            <div>
+              <h4 class="text-sm font-semibold text-gray-900">Color</h4>
+              <p class="text-gray-700 text-justify mt-1"> <%= @product.product_description %></p>
+            </div>
+            <%= form_with(model: @cart_item, url: cart_items_path, method: :post, remote:false) do |f|  %>
+              <%= f.hidden_field :quantity, value: 1  %>
+              <%= f.hidden_field :product_id, value: @product.id %>
+              <%= f.submit "Añadir al carrito", class: 'cursor-pointer mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-blue-500 hover:bg-blue-700 px-8 py-3 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2' %>
+            <% end %>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
